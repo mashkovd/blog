@@ -3,204 +3,196 @@ marp: true
 theme: default
 paginate: true
 size: 16:9
-header: 'MCTL / DEVLOOP'
-footer: 'dmitriimashkov.com/approach'
+header: 'DevLoop · Claude Meetup Podgorica'
+footer: 'mashkovd.github.io/blog · dmitriimashkov.com/approach'
 style: |
-  @import url('https://ui.mctl.ai/0.5.0/mctl.css');
-  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Onest:wght@400;500;600;700&display=swap');
   section {
-    --surface-bg: var(--mctl-surface-dark-bg, #0a0b0d);
-    --surface-elevated: var(--mctl-surface-dark-elevated, #0f1114);
-    --surface-card: var(--mctl-surface-dark-card, #15181d);
-    --surface-line: var(--mctl-surface-dark-line, #1f242b);
-    --surface-line-strong: var(--mctl-surface-dark-line-strong, #2a313a);
-    --surface-fg: var(--mctl-surface-dark-fg, #e6e7e9);
-    --surface-fg-muted: var(--mctl-surface-dark-fg-muted, #a4a8ae);
-    --accent: var(--mctl-accent-terracotta-dark-primary, #e25a3c);
-    --accent-highlight: var(--mctl-accent-terracotta-dark-highlight, #ff8a6a);
-    --accent-soft: var(--mctl-accent-terracotta-dark-soft, #241512);
-    --font-display: var(--mctl-typography-font-family-display, 'Onest', system-ui, sans-serif);
-    --font-mono: var(--mctl-typography-font-family-mono, 'JetBrains Mono', monospace);
-    --font-editorial: var(--mctl-typography-font-family-editorial, 'Instrument Serif', Georgia, serif);
-    font-family: var(--font-display);
-    padding: 60px 72px;
-    background: var(--surface-bg);
-    color: var(--surface-fg);
+    font-family: Onest, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0a0b0d;
+    color: #e6e7e9;
+    padding: 56px 72px;
   }
-  section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: linear-gradient(var(--surface-line) 1px, transparent 1px), linear-gradient(90deg, var(--surface-line) 1px, transparent 1px);
-    background-size: 64px 64px;
-    opacity: .35;
-  }
-  section > * { position: relative; z-index: 1; }
-  header, footer, section::after { font-family: var(--font-mono); color: var(--surface-fg-muted); font-size: 13px; }
-  h1 { color: var(--surface-fg); font-size: 2.2em; line-height: .98; letter-spacing: -.035em; }
-  h2 { color: var(--surface-fg); font-size: 1.3em; line-height: 1.08; }
-  h3 { color: var(--surface-fg-muted); font-family: var(--font-mono); font-size: .62em; text-transform: uppercase; letter-spacing: .08em; }
-  p, li { font-size: .78em; line-height: 1.45; }
-  strong { color: var(--accent-highlight); }
-  em { color: var(--accent-highlight); }
-  .eyebrow { font-family: var(--font-mono); font-size: .52em; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--surface-fg-muted); margin-bottom: 16px; }
-  .eyebrow::before { content: '— '; color: var(--accent); }
-  .lede { font-family: var(--font-editorial); color: var(--surface-fg-muted); font-size: 1.18em; line-height: 1.12; max-width: 900px; }
-  .muted { color: var(--surface-fg-muted); }
-  .mono { font-family: var(--font-mono); }
-  .grid2, .grid3, .grid4 { display: grid; gap: 20px; margin-top: 26px; }
-  .grid2 { grid-template-columns: repeat(2, 1fr); }
-  .grid3 { grid-template-columns: repeat(3, 1fr); }
-  .grid4 { grid-template-columns: repeat(4, 1fr); }
-  .panel { border: 1px solid var(--surface-line-strong); border-radius: 8px; background: var(--surface-elevated); padding: 20px; }
-  .panel.accent { border-color: var(--accent); background: var(--accent-soft); }
-  .panel.gate { border: 2px dashed var(--accent); }
-  .n { display: block; color: var(--accent-highlight); font-family: var(--font-mono); font-size: .48em; margin-bottom: 10px; }
-  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 26px; }
-  .node { display: grid; place-items: center; min-height: 64px; padding: 8px; border: 1px solid var(--surface-line-strong); border-radius: 8px; background: var(--surface-elevated); text-align: center; font-size: .64em; }
-  .node.gate { border: 2px dashed var(--accent); }
-  .arrow { color: var(--accent); font-family: var(--font-mono); }
-  .chain { display: grid; grid-template-columns: 1fr auto 1.2fr auto 1fr; gap: 12px; align-items: stretch; margin-top: 28px; }
-  .artifact { display: flex; flex-direction: column; justify-content: space-between; min-height: 130px; padding: 20px; border: 1px solid var(--surface-line-strong); border-radius: 8px; background: var(--surface-elevated); }
-  .artifact small { font-family: var(--font-mono); color: var(--surface-fg-muted); }
-  .statement { border-left: 3px solid var(--accent); padding: 18px 0 18px 24px; margin-top: 28px; font-family: var(--font-editorial); font-size: 1.25em; line-height: 1.08; }
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--surface-line); margin-top: 28px; }
-  .stat { padding: 20px 0; }
-  .stat + .stat { border-left: 1px solid var(--surface-line); padding-left: 20px; }
-  .stat-value { display: block; font-size: 2.6em; line-height: .9; }
-  .stat-label { font-family: var(--font-mono); color: var(--surface-fg-muted); font-size: .48em; letter-spacing: .08em; }
+  h1 { font-size: 2.25em; line-height: .98; letter-spacing: -0.035em; }
+  h2 { color: #a4a8ae; }
+  strong { color: #ff8a6a; }
+  code { background: #0f1114; color: #ff8a6a; padding: .08em .25em; border-radius: 4px; }
+  pre { background: #0f1114; border: 1px solid #2a313a; border-radius: 8px; padding: 18px; }
+  blockquote { border-left: 4px solid #e25a3c; color: #a4a8ae; padding-left: 24px; margin-left: 0; }
+  .kicker { color: #a4a8ae; font-size: .65em; text-transform: uppercase; letter-spacing: .12em; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .card { border: 1px solid #2a313a; border-radius: 8px; padding: 18px; background: #0f1114; }
+  .hot { color: #ff8a6a; }
+  .small { font-size: .75em; color: #a4a8ae; }
   section.title { display: flex; flex-direction: column; justify-content: center; }
-  section.title h1 { font-size: 4em; line-height: .82; letter-spacing: -.06em; margin-bottom: .12em; }
-  section.title h2 { font-family: var(--font-editorial); font-weight: 400; color: var(--surface-fg-muted); font-size: 1.7em; }
   section.title header, section.title footer, section.title::after { display: none; }
 ---
 
 <!-- _class: title -->
 
-<div class="eyebrow">Human-auditable AI delivery</div>
+<div class="kicker">Claude Meetup Podgorica</div>
 
 # DevLoop
-## AI at the keyboard. Humans at the gates.
+## Human-auditable AI delivery
 
-<div class="lede">From a written issue to a deployment the platform observed — with every step leaving a durable record a person can audit.</div>
+A GitHub issue becomes a reviewed proposal, an agent pull request, a release and a deployment — **with humans at the gates, not at the keyboard.**
 
-<div class="mono muted" style="margin-top: 42px; font-size: 15px;">Dmitrii Mashkov · 2026 · MCTL UI tokens 0.5.0</div>
+Dmitrii Mashkov · 2026  
+https://mashkovd.github.io/blog/
+
+<!-- notes: Open with the audience question: who has let Claude write a PR? Who would merge one without reading? -->
 
 ---
 
-<div class="eyebrow">01 · Why this talk</div>
+<div class="kicker">01 · The problem</div>
 
 # AI coding is the easy part.
 
-<div class="lede">The hard part is turning generated code into a delivery process a team can trust.</div>
+The hard part is letting agents move work toward production without turning delivery into an opaque chat log.
 
-<div class="grid4">
-<div class="panel"><span class="n">01 / INTENT</span><h2>What?</h2><p>Where does the request come from, and what exactly was approved?</p></div>
-<div class="panel"><span class="n">02 / OWNERSHIP</span><h2>Who?</h2><p>Who owns each phase — human, agent, or deterministic automation?</p></div>
-<div class="panel"><span class="n">03 / CONTROL</span><h2>When?</h2><p>What must be true before the workflow is allowed to continue?</p></div>
-<div class="panel"><span class="n">04 / EVIDENCE</span><h2>Prove it.</h2><p>Can the result be verified from current, durable artifacts?</p></div>
-</div>
+<div class="grid"><div class="card"><b>Context drifts</b><br>Stale PR head, stale CI, old comments.</div><div class="card"><b>Approval disappears</b><br>Chat approval is not a workflow signal.</div><div class="card"><b>Done is ambiguous</b><br>Merge ≠ release ≠ observed deployment.</div><div class="card hot"><b>DevLoop</b><br>Move trust from conversation to artifacts.</div></div>
+
+<!-- notes: The problem is not generation quality alone. It is control, ownership and evidence. -->
 
 ---
 
-<div class="eyebrow">02 · The actual loop</div>
+<div class="kicker">02 · The loop</div>
 
 # Ten steps. Two gates. One closed loop.
 
-<div class="flow">
-<div class="node">Issue</div><div class="node">Investigate</div><div class="node">Proposal</div><div class="node gate">Approve</div><div class="node">Implement</div>
-</div>
-<div class="flow">
-<div class="node">Monitor ↺</div><div class="node">Deploy</div><div class="node">Release</div><div class="node">Shepherd merge</div><div class="node gate">Review gate</div>
-</div>
+`Issue → Investigate → Proposal → Approve → Implement → Review gate → Shepherd merge → Release → Deploy → Monitor → Issue`
 
-<div class="mono muted" style="margin-top:16px;font-size:13px;"><span class="arrow">- - -</span> dashed outline = control point · Approve = human · Review gate = automated</div>
+**Approve** = human decision  
+**Review gate** = automated evidence
+
+<!-- notes: Keep these names constant through the whole talk. -->
 
 ---
 
-<div class="eyebrow">03 · Contract boundary</div>
+<div class="kicker">03 · Artifacts over vibes</div>
 
 # The proposal is the contract.
 
-<div class="lede">The implementer does <em>not</em> read the original issue. It works from the approved proposal.</div>
+The implementer does **not** read the original issue. It reads the approved proposal.
 
-<div class="chain">
-<div class="artifact"><small>INTENT</small><b>Issue</b><small>what should change</small></div>
-<div class="arrow">→</div>
-<div class="artifact" style="border-color:var(--accent)"><small>CONTRACT</small><b>Approved proposal</b><small>requirements · design · tasks</small></div>
-<div class="arrow">→</div>
-<div class="artifact"><small>EXECUTION</small><b>Implementer</b><small>works only from the contract</small></div>
-</div>
+```text
+agents-state/portfolio/proposals/issue-5-p3-content-collections-for-projects-jour/
+  requirements.md
+  design.md
+  tasks.md
+```
 
-<div class="panel accent" style="margin-top:24px;">Acceptance criteria must be complete <strong>before</strong> approval — not discovered halfway through implementation.</div>
+`Issue → Accepted proposal → Agent PR`
 
----
-
-<div class="eyebrow">04 · Control points</div>
-
-# Two gates. Different owners.
-
-<div class="grid2">
-<div class="panel gate"><span class="n">HUMAN</span><h2>Approve</h2><p>Is this the right change? Is the proposal complete? Is the risk acceptable?</p><p class="mono muted">intent → durable approval signal</p></div>
-<div class="panel gate"><span class="n">AUTOMATED</span><h2>Review gate</h2><p>Does the current PR head pass checks? Are blocking findings resolved? Is the evidence current?</p><p class="mono muted">head SHA + CI + reviews → gate result</p></div>
-</div>
-
-<div class="statement">Humans decide <em>what should happen</em>. Automation proves <em>what is true now</em>.</div>
+<!-- notes: This is the strongest design choice in the system. -->
 
 ---
 
-<div class="eyebrow">05 · Production snapshot</div>
+<div class="kicker">04 · Boundary</div>
 
-# This is not a diagram-only workflow.
+# Why hide the issue from the implementer?
 
-<div class="stats">
-<div class="stat"><span class="stat-value">531</span><span class="stat-label">DEVLOOP PROPOSALS</span></div>
-<div class="stat"><span class="stat-value">24</span><span class="stat-label">SERVICES IN PRODUCTION</span></div>
-<div class="stat"><span class="stat-value">668</span><span class="stat-label">GITHUB RELEASES</span></div>
-</div>
+Because “go read everything and infer intent” is exactly how agentic workflows become non-auditable.
 
-<div class="mono muted" style="font-size:13px;margin-top:12px;">SNAPSHOT · 2026-09-11 · MCTL PLATFORM STATE + GITHUB</div>
+<div class="grid"><div class="card"><b>Bad loop</b><br>Read all context and guess intent.</div><div class="card"><b>DevLoop</b><br>Implement the approved contract. Stop if it is incomplete.</div></div>
 
-<div class="grid2">
-<div class="panel"><h3>Platform</h3><p>k3s · Hetzner · OpenTofu · ArgoCD · Workflows · Rollouts · Vault · CloudNativePG · VictoriaMetrics · Grafana · Loki</p></div>
-<div class="panel"><h3>Agentic layer</h3><p>Role-specific agents · Temporal · MCP · Backstage · release automation · auditable Git artifacts</p></div>
-</div>
+> If the proposal is incomplete, stopping is success.
+
+<!-- notes: A stop is a good outcome when the contract is bad. -->
 
 ---
 
-<div class="eyebrow">06 · Event-driven review</div>
+<div class="kicker">05 · Claude in the loop</div>
 
-# Fresh evidence beats agent memory.
+# Where Claude actually works.
 
-<div class="lede">A GitHub event wakes the workflow. The reviewer then re-reads the world as it exists <em>now</em>.</div>
+<div class="grid"><div class="card"><b>Proposer</b><br>issue → requirements/design/tasks</div><div class="card"><b>Implementer</b><br>accepted proposal → PR</div><div class="card"><b>Reviewer</b><br>current head SHA + CI + comments</div><div class="card"><b>Shepherd</b><br>merge only when gates agree</div></div>
 
-<div class="flow">
-<div class="node"><b>Event</b></div><div class="node"><b>Head SHA</b></div><div class="node"><b>Evidence</b></div><div class="node gate"><b>Gate</b></div><div class="node"><b>Outcome</b></div>
-</div>
+Claude Agent SDK · MCP tools · GitHub · MCTL control plane
 
-<div class="panel accent" style="margin-top:28px;">The reviewer reports only what it can verify against the <strong>current PR head and current evidence</strong>.</div>
+<!-- notes: Explain Claude roles, not “one agent does everything”. -->
 
 ---
 
-<div class="eyebrow">07 · What to copy</div>
+<div class="kicker">06 · Control points</div>
 
-# You do not need MCTL to copy the pattern.
+# Humans decide whether. Claude decides how.
 
-<div class="grid4">
-<div class="panel"><span class="n">01</span><h2>Start with one loop</h2><p>Choose one narrow path from intent to reviewed change.</p></div>
-<div class="panel"><span class="n">02</span><h2>Make artifacts durable</h2><p>Criteria, approvals and evidence must survive chat history.</p></div>
-<div class="panel"><span class="n">03</span><h2>One owner per phase</h2><p>Human, agent or automation — never two competing owners.</p></div>
-<div class="panel"><span class="n">04</span><h2>Close the loop</h2><p>Done means the platform observed the result, not merely that code merged.</p></div>
-</div>
+<div class="grid"><div class="card"><b>Human gate: Approve</b><br>Right change? Complete proposal? Acceptable risk?</div><div class="card"><b>Automated gate: Review</b><br>Current head passes? P1/P2 resolved? Evidence fresh?</div></div>
+
+<!-- notes: This is not no-humans. It is humans at high-leverage control points. -->
 
 ---
 
-<div class="eyebrow">08 · Closing</div>
+<div class="kicker">07 · Real run</div>
 
-# AI at the keyboard.  
-# **Humans at the gates.**
+# A real agent PR: portfolio #21.
 
-<div class="lede">DevLoop turns agentic development into a delivery process that is <strong>reviewable, gated and observable.</strong></div>
+Opened by `mctl-agents[bot]`, from an accepted proposal, closes `mctlhq/portfolio#5`.
 
-<div class="mono muted" style="margin-top:38px;font-size:14px;">Dmitrii Mashkov · dmitriimashkov.com/approach · github.com/mctlhq</div>
+```text
+02:11  PR opened
+02:18  Claude review: 0 P1 · 3 P2 · 4 P3
+03:02  merged: 4 commits · 18 files · +1006 / −3
+```
+
+https://github.com/mctlhq/portfolio/pull/21
+
+<!-- notes: This is the concrete example. Show the real PR if Wi-Fi works; record demo beforehand. -->
+
+---
+
+<div class="kicker">08 · Review gate</div>
+
+# The reviewer blocked real issues.
+
+<div class="grid"><div class="card"><b>P2</b><br>ADR headings could pass in English only.</div><div class="card"><b>P2</b><br>EN/RU project files could drift independently.</div><div class="card"><b>P2</b><br>Tests existed but were not wired into CI/build.</div><div class="card hot"><b>Rule</b><br>Gate uses current evidence, not vibes.</div></div>
+
+<!-- notes: This answers “does Claude review actually catch anything?”. -->
+
+---
+
+<div class="kicker">09 · What broke</div>
+
+# The useful part is what failed.
+
+<div class="grid"><div class="card"><b>#17</b><br>Lockfile platform trap → use `--package-lock-only`.</div><div class="card"><b>#19</b><br>Storage failure made toggles inert → persistence may fail, function must not.</div><div class="card"><b>#29</b><br>PR-body acceptance criteria deadlocked → criteria must be satisfiable by commit.</div><div class="card"><b>#21</b><br>Human found false evidence row → preserve mistake, fix narrative.</div></div>
+
+<!-- notes: These are the credibility slides. Failures became rules. -->
+
+---
+
+<div class="kicker">10 · Snapshot</div>
+
+# What 531 loops taught me.
+
+<div class="grid"><div class="card"><h1>531</h1>DevLoop proposals</div><div class="card"><h1>24</h1>production services</div><div class="card"><h1>668</h1>releases</div><div class="card hot">context boundaries > bigger prompts<br>durable artifacts > chat history<br>independent verification > confidence</div></div>
+
+<span class="small">Snapshot: 2026-09-11</span>
+
+<!-- notes: Do not dwell on k3s/Argo/Vault here; keep infrastructure for backup. -->
+
+---
+
+<div class="kicker">11 · Takeaway</div>
+
+# Start with one loop.
+
+`issue → proposal → approval → PR → independent review`
+
+Do not start by building a platform. Start by making one AI-assisted path **reviewable, gated and observable**.
+
+<!-- notes: Make this copyable tomorrow. -->
+
+---
+
+<div class="kicker">Q&A</div>
+
+# AI at the keyboard. Humans at the gates.
+
+DevLoop turns Claude-assisted development into a delivery process a team can audit.
+
+https://dmitriimashkov.com/approach/  
+https://github.com/mctlhq  
+https://mashkovd.github.io/blog/
+
+<!-- notes: Invite questions about MCP, Claude roles, operational gates and failure modes. -->
